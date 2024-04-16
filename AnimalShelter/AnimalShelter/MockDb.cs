@@ -6,7 +6,7 @@
         public Animal GetAnimal(int id);
         public bool AddAnimal(Animal animal);
         public Animal? RemoveAnimal(int id);
-        
+        public ICollection<MedicalRecord> GetAllVisits(int id);
     }
     
     public class MockDb: IMockDb
@@ -17,7 +17,7 @@
         {
             _animals = new List<Animal>{
                 new Animal{
-                    Id = 1, Name = "Burak", Color = "Brown", Weight = 2.5, Category = "Akita"
+                    Id = 1, Name = "Burak", Color = "Brown", Weight = 2.5, Category = "Akita" 
                 },
                 new Animal{
                     Id = 2, Name = "Pasztet", Color = "Black", Weight = 3.78, Category = "German Shepherd"
@@ -54,6 +54,10 @@
             _animals.Remove(animalToDelete);
             return animalToDelete;
         }
-        
+
+        public ICollection<MedicalRecord> GetAllVisits(int id)
+        {
+            return _animals.FirstOrDefault(a => a.Id == id).MedicalRecords;
+        }
     }
 }

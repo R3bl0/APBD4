@@ -30,6 +30,17 @@ namespace AnimalShelter.Controllers
             return Ok(animal);
         }
         
+        [HttpGet("{id}/MedicalRecords")]
+        public IActionResult GetAllVisits(int id)
+        {
+            var records = _mockDb.GetAllVisits(id);
+            if (records is null)
+            {
+                return NotFound();
+            }
+            return Ok(records);
+        }
+        
         [HttpPost]
         public IActionResult Add(Animal animal)
         {
